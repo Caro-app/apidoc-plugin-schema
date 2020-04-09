@@ -205,7 +205,8 @@ function traverse(schema, p, group) {
 		//console.log(parent+key, params[parent + key])
 		var subs = {};
 		//var subgroup = p ? p+'.' : ''; // TODO apidoc - groups cannot have `.` in them
-		if (isType(param.type, 'array') && param.items.type === 'object') {
+		if (isType(param.type, 'array')
+			&& (param.items.type === 'object' || param.items['allOf'])) {
 			subs = traverse(param.items, key, group); // subgroup+
 		} else if (isType(param.type, 'object')) {
 			subs = traverse(param, key, group); // subgroup+
